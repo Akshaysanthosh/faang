@@ -1,0 +1,33 @@
+
+data={source faang file}
+
+let i=0
+let j=0
+let newData=[]
+
+let companyTotalObject={}
+
+
+for (i = 0; i < data.length; i++) {
+
+  var str = data[i]["Companies"]
+  var str_array = str.split(',');
+  let tempObj={}
+
+for( j = 0; j < str_array.length; j++) {
+   str_array[j] = str_array[j].replace(/^\s*/, "").replace(/\s*$/, "");
+     companyTotalObject[String(str_array[j])]=str_array[j]
+     tempObj[str_array[j]]=str_array[j]
+}
+
+  newData.push({
+    "Problem Name":data[i]["Problem Name"],
+   "Difficulty Level ":data[i]["Difficulty Level"],
+   "Companies":data[i]["Companies"],
+    "Problem URL":data[i][ "Problem URL"],
+    "Solution Available":data[i]["Solution Available"],
+    "company-key":tempObj,
+    "wide-occurance-score":Object.keys(tempObj).length/180
+  })
+} 
+console.log(JSON.stringify(newData, null, 2))
